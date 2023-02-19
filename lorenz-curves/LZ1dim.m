@@ -157,11 +157,11 @@ title('Error: Lorenz curve - Power Law')
 
 figure(8)
 plot(x,ITiRef(iter,:)-(1-(1-x).^beta));
-title('Error: Integrated Tail curve inverse - Power Law')
+title('Error: Integrated Tail curve inverse - Pareto Law')
 
 figure(9)
 plot(x,LZiRef1(iter,:)-(1-(1-x).^beta));
-title('Error: Lorenz curve inverse (refl. method) - Power Law')
+title('Error: Lorenz curve inverse (refl. method) - Pareto Law')
 
 
 

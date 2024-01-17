@@ -1,2 +1,2 @@
 # source-code
-V.J. source code (PhD research, papers, etc.)
+V.J. source code (papers)

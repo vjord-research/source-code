@@ -68,6 +68,9 @@ title(ax2,'Reflected Lorenz curve (IT method) - first iteration')
 ax3 = nexttile;
 plot(ax3,x,LZiRef1(1,:));
 title(ax3,'Reflected Lorenz curve (s. refl. method) - first iteration')
+ylabel('Lorenz curve')
+xlabel('Cumulative probability')
+grid on
 
 % the next Lorenz curves
 limi=1;
@@ -89,6 +92,10 @@ for i=2:1:iter
     title('Lorenz curve - iterations')
     hold on
 end
+axis([0 1 0 1])
+ylabel('Lorenz curve')
+xlabel('Cumulative probability')
+grid on
 
 figure(3)
 for i=2:1:iter
@@ -96,6 +103,10 @@ for i=2:1:iter
     title('Reflected Lorenz curve (IT method) - iterations')
     hold on
 end
+axis([0 1 0 1])
+ylabel('Lorenz curve')
+xlabel('Cumulative probability')
+grid on
 
 figure(4)
 for i=2:1:iter
@@ -103,6 +114,10 @@ for i=2:1:iter
     title('Reflected Lorenz curve (s. refl. method) - iterations')
     hold on
 end
+axis([0 1 0 1])
+ylabel('Lorenz curve')
+xlabel('Cumulative probability')
+grid on
 
 figure(5)
 plot(x,LZi(end,:));
@@ -111,6 +126,10 @@ hold on
 plot(x,ITiRef(end,:));
 hold on
 plot(x,LZiRef1(end,:));
+axis([0 1 0 1])
+ylabel('Lorenz curve')
+xlabel('Cumulative probability')
+grid on
 
 figure(6)
 alpha=(sqrt(5)+1)/2;
@@ -119,18 +138,31 @@ plot(x,x.^alpha);
 title('Lorenz curve theoretical limit - joint: primal and reflected')
 hold on
 plot(x,1-(1-x).^beta);
+axis([0 1 0 1])
+ylabel('Lorenz curve')
+xlabel('Cumulative probability')
+grid on
 
 figure(7)
 plot(x,LZi(iter,:)-x.^alpha);
 title('Error: Lorenz curve - Power Law')
+ylabel('Lorenz curve')
+xlabel('Cumulative probability')
+grid on
 
 figure(8)
 plot(x,ITiRef(iter,:)-(1-(1-x).^beta));
 title('Error: Reflected Lorenz curve (IT method) - Pareto Law')
+ylabel('Lorenz curve')
+xlabel('Cumulative probability')
+grid on
 
 figure(9)
 plot(x,LZiRef1(iter,:)-(1-(1-x).^beta));
 title('Error: Reflected Lorenz curve (s. refl. method) - Pareto Law')
+ylabel('Lorenz curve')
+xlabel('Cumulative probability')
+grid on
 
 
 

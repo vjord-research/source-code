@@ -1,0 +1,158 @@
+All Rights Reserved, 2022
+---------
+MATLAB CODES (1. Point matlab to the working folder with the codes, 2. copy the below commands to the console -> enter):
+---------
+1) PRICES
+
+Compound call:
+
+Function pattern uniform vols; NB1: tech risk/notech. risk -> by controlling the vector of probs, NB2: 'no' serves to show that we are not interested in the greeks. This fastens the computation:
+NCall(V,r,vol,t00,t_i,K_i,p_i,d_i,init,MaxStep,StepSize,'no')
+
+Examples:
+
+NCall(1277.89,log(1.0484),0.98,0,[1;2;3;5;8;9],[9.78;13.14;50.98;176.92;61.26;62.2],[1;1;1;1;1;1],[0;0;0;0;0;0],1,2,0.25,'no');
+1.099660971283730e+03
+
+NCall(1277.89,log(1.0484),0.5,0,[1;2;3;5;8;9],[9.78;13.14;50.98;176.92;61.26;62.2],[0.3;0.4;0.3;0.5;0.6;0.7],[0;0;0;0;0;0],1,2,0.25,'no');
+2.373972150352929
+
+Function pattern different vols (just more general); NB: tech risk/notech. risk -> by controlling the vector of probs:
+[P,Vbar]=NCall_vol(V,r,vol_i,t00,t_i,K_i,p_i,init,MaxStep,StepSize)
+
+NCall_vol(1277.89,log(1.0484),[0.5;0.5;0.5;0.5;0.5;0.5],0,[1;2;3;5;8;9],[9.78;13.14;50.98;176.92;61.26;62.2],[1;1;1;1;1;1],[0;0;0;0;0;0],1,2,0.25)
+1.003574595004104e+03
+
+NCall_vol(1277.89,log(1.0484),[0.3;0.4;0.5;0.6;0.5;0.5],0,[1;2;3;5;8;9],[9.78;13.14;50.98;176.92;61.26;62.2],[1;1;1;1;1;1],[0;0;0;0;0;0],1,2,0.25)
+1.016544735682139e+03
+
+NCall_vol(1277.89,log(1.0484),[0.5;0.5;0.5;0.5;0.5;0.5],0,[1;2;3;5;8;9],[9.78;13.14;50.98;176.92;61.26;62.2],[0.3;0.4;0.3;0.5;0.6;0.7],[0;0;0;0;0;0],1,2,0.25)
+2.373972150352929
+
+NCall_vol(1277.89,log(1.0484),[0.5;0.5;0.5;0.5;0.5;0.5],0,[1;2;3;5;8;9],[9.78;13.14;50.98;176.92;61.26;62.2],[0.3;0.4;0.3;0.5;0.6;0.7],[0;0;0;0;0;0.1],1,2,0.25)
+1.772863385469699
+
+NCall_vol(1277.89,log(1.0484),[0.5;0.5;0.5;0.5;0.5;0.5],0,[1;2;3;5;8;9],[9.78;13.14;50.98;176.92;61.26;62.2],[0.3;0.4;0.3;0.5;0.6;0.7],[0;0;0;0;0.1;0.1],1,2,0.25)
+1.293898842897885
+
+
+
+2) PRICES' PLOTS 
+
+(the plots represent how the compounding evolves; the computation could take a lot of time 20-30 min;if you are interested in a particular price just take a vertical line and you will see the prices for the different compound options)
+
+Compound call:
+
+Function pattern: (1) uniform or different volatilities, no-technical risk or technical risk -> controlling by the vector input, e.g. same sigma vs. different sigma in the vector, (2) same tech. risk prob. vs. different tech. risk. prob., (3) dividends
+
+[P,Vbar]=NCallPlot(VGrid,r,vol_i,t00,t_i,K_i,p_i,init,MaxStep,StepSize)
+ 
+Examples:
+
+NCallPlot([0.1:1:50],log(1.0484),[0.5;0.5],0,[1;2],[9.78;13.14],[1;1],[0;0],1,2,0.25,[1;1]);
+
+NCallPlot([0.1:1:50],log(1.0484),[0.5;0.5],0,[1;2],[9.78;13.14],[1;1],[0;0],1,2,0.25,[0;1]);
+
+NCallPlot([0.1:1:50],log(1.0484),[0.5;0.5],0,[1;2],[9.78;13.14],[1;1],[0;0],1,2,0.25,[1;0]);
+
+NCallPlot([0.1:1:600],log(1.0484),[0.5;0.5;0.5;0.5;0.5;0.5],0,[1;2;3;5;8;9],[9.78;13.14;50.98;176.92;61.26;62.2],[1;1;1;1;1;1],[0;0;0;0;0;0],1,2,0.25,[1;0;0;0;0;0]);
+
+NCallPlot([0.1:1:600],log(1.0484),[0.5;0.5;0.5;0.5;0.5;0.5],0,[1;2;3;5;8;9],[9.78;13.14;50.98;176.92;61.26;62.2],[1;1;1;1;1;1],[0;0;0;0;0;0],1,2,0.25,[1;1;1;1;1;1]);
+
+NCallPlot([0.1:1:600],log(1.0484),[0.5;0.5;0.5;0.5;0.5;0.5],0,[1;2;3;5;8;9],[9.78;13.14;50.98;176.92;61.26;62.2],[0.3;0.6;0.7;0.7;0.8;0.9],[0.1;0.1;0.2;0.15;0.1;0.05],1,2,0.25,[1;1;1;1;1;1]);
+
+NCallPlot([0.1:1:600],log(1.0484),[0.5;0.5;0.5;0.5;0.5;0.5],0,[1;2;3;5;8;9],[9.78;13.14;50.98;176.92;61.26;62.2],[0.3;0.6;0.7;0.7;0.8;0.9],[0.1;0.1;0.2;0.15;0.1;0.05],1,2,0.25,[1;0;0;0;0;0]);
+
+
+---------------------------------------------------------------------------
+
+3) VOLATILITIES' PLOTS 
+
+(the plots represent how the compounding evolves; if you are interested in a particular price just take a vertical line and you will see the prices for the different compound options)
+
+Compound call:
+
+Function pattern: only uniform vol grid, no-technical risk or technical risk -> controlling by the vector input, e.g. same sigma vs. different sigma in the vector, same tech. risk prob. vs. different tech. risk. prob.
+
+Examples:
+
+[P,Vbar]=NCallPlotSig(V,r,volGrid,t00,t_i,K_i,p_i,init,MaxStep,StepSize)
+ 
+NCallPlotSig(1277.89,log(1.0484),[0.1:0.1:1.5],0,[1;2;3;5;8;9],[9.78;13.14;50.98;176.92;61.26;62.2],[1;1;1;1;1;1],[0;0;0;0;0;0],1,2,0.25,[1;1;1;1;1;1]);
+
+for check: 
+NCall(1277.89,log(1.0484),0.98,0,[1;2;3;5;8;9],[9.78;13.14;50.98;176.92;61.26;62.2],[1;1;1;1;1;1],[0;0;0;0;0;0],1,2,0.25,'no')
+1.099660971283730e+03
+
+4) STRIKES' PLOTS 
+
+(the plots represent how the compounding evolves; if you are interested in a particular price just take a vertical line and you will see the prices for the different compound options)
+
+Compound call:
+
+Function pattern: vector of vols allowed, no-technical risk or technical risk -> controlling by the vector input, e.g. same sigma vs. different sigma in the vector, same tech. risk prob. vs. different tech. risk. prob.; KGrid - a factor to the given K vector: Namely, a KGrid of [0.1] means that [9.78;13.14;50.98;176.92;61.26;62.2] is transformed to [1.1*9.78;1.1*13.14;1.1*50.98;1.1*176.92;1.1*61.26;1.1*62.2]. So for each point in the grid we shift the given Ks. E.g. for a KGrid of [0.1:0.1:0.5] we will have the consecutive shift by 1.1,1.2,...,1.6
+
+Examples:
+
+[P,Vbar]=NCallPlotK(V,r,vol_i,t00,t_i,K,KGrid,p_i,init,MaxStep,StepSize)
+ 
+NCallPlotK(1277.89,log(1.0484),[0.3;0.4;0.5;0.6;0.5;0.5],0,[1;2;3;5;8;9],[9.78;13.14;50.98;176.92;61.26;62.2],[-0.5:0.1:0.5],[1;1;1;1;1;1],[0;0;0;0;0;0],1,2,0.25,[1;1;1;1;1;1]);
+
+for check:
+NCall_vol(1277.89,log(1.0484),[0.3;0.4;0.5;0.6;0.5;0.5],0,[1;2;3;5;8;9],[9.78;13.14;50.98;176.92;61.26;62.2],[1;1;1;1;1;1],[0;0;0;0;0;0],1,2,0.25);
+1.016544735682139e+03
+
+5) MATURITIES' PLOTS
+
+
+(the plots represent how the compounding evolves; if you are interested in a particular price just take a vertical line and you will see the prices for the different compound options)
+
+Compound call:
+
+The same logic as above. We scale all the maturities.
+
+Examples:
+
+[P,Vbar]=NCallPlotK(V,r,vol_i,t00,t_i,K,TGrid,p_i,init,MaxStep,StepSize)
+ 
+NCallPlotT(1277.89,log(1.0484),[0.3;0.4;0.5;0.6;0.5;0.5],0,[1;2;3;5;8;9],[9.78;13.14;50.98;176.92;61.26;62.2],[-0.5:0.1:0.5],[1;1;1;1;1;1],[0;0;0;0;0;0],1,2,0.25,[1;1;1;1;1;1]);
+
+for check:
+NCall_vol(1277.89,log(1.0484),[0.3;0.4;0.5;0.6;0.5;0.5],0,[1;2;3;5;8;9],[9.78;13.14;50.98;176.92;61.26;62.2],[1;1;1;1;1;1],[0;0;0;0;0;0],1,2,0.25);
+1.016544735682139e+03
+
+----------------------------------------------------------------------------
+6) GREEKS
+
+Compound call:
+
+Function pattern uniform volatilities; NB1: tech risk/notech. risk -> by controling the vector of probs, NB2: 'yes' serves to show that we are interested in the greeks. This slows marginally the computation, NB3: We deal only with uniform vols due to the vega which in our case is just one single sensitivity.
+NCall(V,r,vol,t00,t_i,K_i,p_i,init,MaxStep,StepSize,'yes')
+
+Examples:
+
+NCall(500,log(1.0484),0.5,0,[1;2;3;5;8;9],[9.78;13.14;50.98;176.92;61.26;62.2],[1;1;1;1;1;1],[0;0;0;0;0;0],1,2,0.25,'yes');
+Price: 264.9089 Delta: 0.85533 Gamma: 0.00046539 Vega: 346.4483 Theta: -22.2362
+
+7) GREEKS' PLOTS 
+
+(the plots represent how the compounding evolves; if you are interested in a particular price just take a vertical line and you will see the prices for the different compound options; NB1: put in GraphsIndic vector 1's for the graphs of the intermediate options to be shown and zeros for the intermediate options not to be shown; NB2 - C(1) is the n-fold compound option in the legend; C(2) - n-1 fold, and so on. This notation is also followed in the technical note)
+
+
+Compound call:
+
+Function pattern: uniform volatilities, no-technical risk or technical risk -> controlling by the vector input, e.g. same sigma vs. different sigma in the vector, same tech. risk prob. vs. different tech. risk. prob.
+
+[P,Vbar]=NCallPlotGreeks(VGrid,r,vol_i,t00,t_i,K_i,p_i,d_i,init,MaxStep,StepSize,GreeksIndic,GraphsIndic)
+ 
+Examples:
+
+NCallPlotGreeks([0.1:1:100],log(1.0484),0.5,0,[1;2;3;5;8;9],[9.78;13.14;50.98;176.92;61.26;62.2],[1;1;1;1;1;1],[0;0;0;0;0;0],1,2,0.25,'yes',[1;1;1;1;1;1]);
+
+NCallPlotGreeks([0.1:1:1000],log(1.0484),0.5,0,[1;2;3;5;8;9],[9.78;13.14;50.98;176.92;61.26;62.2],[1;1;1;1;1;1],[0;0;0;0;0;0],1,2,0.25,'yes',[1;0;1;0;1;0]);
+shows the 6-th fold, 4-th fold, 2-th fold; 
+
+NCallPlotGreeks([0.1:1:500],log(1.0484),0.5,0,[1;2;3;5;8;9],[9.78;13.14;50.98;176.92;61.26;62.2],[0.3;0.4;0.3;0.5;0.6;0.7],[0.1;0.2;0.3;0.1;0.2;0.3],1,2,0.25,'yes',[1;1;1;1;1;1]);
+
+Some dividends introduced (remember - they are a ratio from the underlying. So in our case 0.1*V, 0.2*V,..., etc.)
+
